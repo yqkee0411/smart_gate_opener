@@ -41,14 +41,22 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 
 ### Hardware
 
-- **ESP8266 Relay Board**
+- **ESP8266 Relay Board with 220v power supply**
   - Relay simulates physical gate button press.
   - GPIO input connected to external light relay output for state detection.
+  - This avoids needing an external power adapter and keeps the installation compact.
 - **Existing Gate Control Board**
   - Remains intact, remote control still functional.
-
+<!--
 *(Add wiring diagram here)*
+-->
+ESp8266 Relay Board           |
+:-------------------------:|
+<img width="512" height="468" alt="ESP8266-4-Relay" src="https://github.com/user-attachments/assets/75a68d3e-11a3-40da-92f4-01e3e778809b" /> |
 
+Gate Controller Board      | Wiring Diagram
+:-------------------------: | :-------------------------: |
+<img width="500" height="450" alt="image" src="https://github.com/user-attachments/assets/e399989b-fe38-4427-b14e-a9ad72f52b43" /> | <img width="500" height="450" alt="image" src="https://github.com/user-attachments/assets/45b86306-57a5-43ea-a3cc-9c24f10ce463" />
 
 ### Software
 
@@ -60,6 +68,51 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
   - Automations for gate open notifications
 - **Apple HomeKit**
   - Integrated via Home Assistant’s HomeKit bridge
+
+---
+
+## Wiring & Setup
+
+### Before installation
+
+1. Flash Tasmota firmware on the ESP8266
+2. Configure relay control in Tasmota (assign GPIOs and verify toggle functionality)
+3. Setup inching mode on the relay (e.g., 0.5–1 second) to simulate a momentary button press and release.  
+4. Set up MQTT.
+5. Integrate into Home Assistant via MQTT and ensure all is working.
+
+### Installation 
+
+> **⚠️ Safety Warning**  
+> Working with mains electricity can be dangerous. Ensure the power is switched off before wiring. If unsure, turn off the **main breaker** (note: this cuts power to the entire house).
+
+#### Steps
+
+1. **Power Off**
+   - Turn off the power / breaker for the gate.  
+   - Optionally, turn off the main breaker for full isolation.
+
+2. **Power the ESP8266**
+   - Connect the ESP8266 board directly to the mains input of the gate controller, as the board includes a built‑in power supply for 220V AC.  
+
+2. **Connect Relay Control**
+   - Wire the relay output (COM and NO) in parallel with the existing physical gate button input.  
+   - Remember to configure relay **inching mode** in Tasmota so it briefly activates (momentary press) instead of staying latched.
+
+3. **Connect State Detection**
+   - Wire the auxiliary relay output (from the gate controller) to an ESP8266 **GPIO input**.  
+   - When the auxiliary relay activates (gate open), the GPIO is pulled low, allowing it to detect gate status.
+
+4. **Secure and Test**
+   - Ensure all connections are insulated and secured.  
+   - Restore power and test both:
+     - **Manual control** (original remote/button still works)  
+     - **Smart control** (via Home Assistant/MQTT)  
+     - **Inching timing** (verify the relay press duration correctly triggers the gate without multiple activations)
+
+Sample wiring            |
+:-------------------------:|
+<img width="430" height="391" alt="sample-wiring" src="https://github.com/user-attachments/assets/e46446d4-92ff-4ed9-a70a-029e3fcf4cf2" /> |
 
 ---
 
@@ -78,7 +131,10 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 
 ### 2. Gate State Detection
 
-The original gate controller includes a built-in feature to trigger an **auxiliary relay** when the gate is open. This relay was originally intended to turn on an external light at night, based on a **photoelectric sensor** that detects ambient light levels.
+The original gate controller includes a built-in feature to trigger an **auxiliary relay** when the gate is open. This relay was originally intended to control an external light and can be configured to either:
+
+- Trigger every time the gate opens, or  
+- Trigger only at night using the built-in **photoelectric sensor**.
 
 To repurpose this feature for state detection:
 
@@ -86,7 +142,7 @@ To repurpose this feature for state detection:
 - When the relay activates (gate open), the GPIO pin is pulled low (connected to ground).  
 - Home Assistant reads this signal to determine whether the gate is open or closed.  
 
-Because the relay only activates at night, I covered the photoelectric sensor, forcing it to treat all times as “night” so that the relay reliably triggers whenever the gate opens. This provided a simple, non-invasive way to detect gate state without modifying the main control board.
+> The **original light control function** can still be used if desired as another relay can be triggered based on the detected gate state.
 
 ---
 
