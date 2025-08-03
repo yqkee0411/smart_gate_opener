@@ -17,10 +17,11 @@ A retrofit IoT solution to automate an existing gate system using an **ESP8266 r
 
 This project adds smart control to my home's gate system. Instead of replacing the gate controller which is expensive and wasteful, I used an ESP8266 with a relay to **simulate a physical button press**, preserving full compatibility with the original remote control. Additionally, I integrated a **state detection mechanism** by reading a GPIO signal from the gate's lighting relay, which indicates whether the gate is open or closed (Depending on the control board model, you mileage may vary).
 
-**Motivation:**
+## Motivation
 - Frequent parcel deliveries when I am not home.
 - Poor remote control range (car window tint blocks RF signal).
 - No need to wait for gate openeing while arriving home.
+- Wanted a **low-cost** solution that doesn't affect original funtionality, ensuring other family members can continue using it in their preferred way.
 
 By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now open/close the gate from my phone and check its status remotely.
 
