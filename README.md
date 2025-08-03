@@ -15,7 +15,7 @@ A retrofit IoT solution to automate an existing gate system using an **ESP8266 r
 
 ## Overview
 
-This project adds smart control to my home's gate system. Instead of replacing the gate controller, I used an ESP8266 with a relay to **simulate a physical button press**, preserving full compatibility with the original remote control. Additionally, I integrated a **state detection mechanism** by reading a GPIO signal from the gate's lighting relay, which indicates whether the gate is open or closed.
+This project adds smart control to my home's gate system. Instead of replacing the gate controller which is expensive and wasteful, I used an ESP8266 with a relay to **simulate a physical button press**, preserving full compatibility with the original remote control. Additionally, I integrated a **state detection mechanism** by reading a GPIO signal from the gate's lighting relay, which indicates whether the gate is open or closed (Depending on the control board model, you mileage may vary).
 
 **Motivation:**
 - Frequent parcel deliveries when I am not home.
@@ -66,9 +66,24 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 
 1. **Gate control:**
    - Sending an MQTT command toggles the relay, simulating the gate button.
-2. **Gate state detection:**
-   - When the gate opens, the controller’s external light relay activates.
+<!-- 2. **Gate state detection:**
+   - My existing gate controller can be set / program to have a relay triggered when the gate is open for turning on the light at night originally, it senses the night time by using a photoelectric sensor, so I have to cover up the sensor for it to send relay trigger signal every time.
+   - When the gate opens, my existing gate controller’s external light relay activates.
    - This signal is read via a GPIO pin (pulled to ground) to determine gate status.
+
+-->
+
+2. **Gate State Detection**
+
+The original gate controller includes a built-in feature to trigger an **auxiliary relay** when the gate is open. This relay was originally intended to turn on an external light at night, based on a **photoelectric sensor** that detects ambient light levels.
+
+To repurpose this feature for state detection:
+
+- I connected the auxiliary relay output to an **ESP8266 GPIO input**.  
+- When the relay activates (gate open), the GPIO pin is pulled low (connected to ground).  
+- Home Assistant reads this signal to determine whether the gate is open or closed.  
+
+Because the relay only activates at night, I covered the photoelectric sensor, forcing it to treat all times as “night” so that the relay reliably triggers whenever the gate opens. This provided a simple, non-invasive way to detect gate state without modifying the main control board.
 
 ---
 
