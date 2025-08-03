@@ -37,7 +37,7 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 
 ---
 
-##System Architecture
+## System Architecture
 
 ### Hardware
 
