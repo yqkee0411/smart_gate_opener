@@ -3,6 +3,15 @@
 A retrofit IoT solution to automate an existing gate system using an **ESP8266 relay board** with **Tasmota firmware**. This design adds **smart control via Home Assistant and Apple HomeKit** without removing the original control board, ensuring that the traditional remote control still functions normally.
 
 ---
+## Acheivement
+
+- Added **smart control** to existing gate system without replacing the control board.
+- Integrated with **Home Assistant and Apple HomeKit** for remote access and automations.
+- Preserves original **RF remote functionality** while enabling Wi-Fi control.
+- Uses **GPIO sensing** to detect gate open/close state via external light relay.
+- Solved poor RF range issue and improved convenience for parcel deliveries.
+
+---
 
 ## Overview
 
@@ -11,9 +20,9 @@ This project adds smart control to my home's gate system. Instead of replacing t
 **Motivation:**
 - Frequent parcel deliveries when I am not home.
 - Poor remote control range (car window tint blocks RF signal).
-- Need to open the gate remotely before arriving home.
+- No need to wait for gate openeing while arriving home.
 
-By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now open/close the gate from my phone, automate actions, and check its status remotely.
+By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now open/close the gate from my phone and check its status remotely.
 
 ---
 
@@ -27,7 +36,9 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 
 ---
 
-## Hardware
+##System Architecture
+
+### Hardware
 
 - **ESP8266 Relay Board**
   - Relay simulates physical gate button press.
@@ -37,9 +48,8 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 
 *(Add wiring diagram here)*
 
----
 
-## Software
+### Software
 
 - **Tasmota firmware** on ESP8266
   - Relay control via MQTT or HTTP commands
@@ -69,6 +79,7 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 
 *(Insert screenshots of dashboard and HomeKit integration here)*
 
+<!--
 ---
 
 ## Skills Demonstrated
@@ -80,6 +91,7 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 - HomeKit integration via Home Assistant
 
 ---
+-->
 
 ## Project Impact
 
