@@ -65,8 +65,10 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 
 ## How It Works
 
-1. **Gate control:**
-   - Sending an MQTT command toggles the relay, simulating the gate button.
+### 1. Gate Control
+- Sending an **MQTT command** toggles the relay on the ESP8266.  
+- This simulates pressing the physical gate button, triggering the gate to open or close.
+
 <!-- 2. **Gate state detection:**
    - My existing gate controller can be set / program to have a relay triggered when the gate is open for turning on the light at night originally, it senses the night time by using a photoelectric sensor, so I have to cover up the sensor for it to send relay trigger signal every time.
    - When the gate opens, my existing gate controller’s external light relay activates.
@@ -74,7 +76,7 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 
 -->
 
-2. **Gate State Detection**
+### 2. Gate State Detection
 
 The original gate controller includes a built-in feature to trigger an **auxiliary relay** when the gate is open. This relay was originally intended to turn on an external light at night, based on a **photoelectric sensor** that detects ambient light levels.
 
