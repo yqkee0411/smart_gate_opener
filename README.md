@@ -3,7 +3,7 @@
 A retrofit IoT solution to automate an existing gate system using an **ESP8266 relay board** with **Tasmota firmware**. This design adds **smart control via Home Assistant and Apple HomeKit** without removing the original control board, ensuring that the traditional remote control still functions normally.
 
 ---
-## Acheivement
+## Achievement
 
 - Added **smart control** to existing gate system without replacing the control board.
 - Integrated with **Home Assistant and Apple HomeKit** for remote access, real-time status monitoring (open/closed) and automations.
@@ -186,7 +186,7 @@ Home Assistant            | Apple Homekit
 
 ## Sample YAML for Home Assistant
 ```
-//If you already have other sensor in config, no need to add in the "template:" just continue 
+#If you already have other sensor in config, no need to add in the "template:" just continue 
 template:
     - sensor:
       - name: "gate"
