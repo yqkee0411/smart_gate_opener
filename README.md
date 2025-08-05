@@ -57,6 +57,8 @@ ESP8266 Relay Board           |
 
 > This is just for sample as Gate controller board is different depending on make and model
 
+> Please Check your own gate controller’s manual.
+
 Existing Gate Controller Board      | Wiring Manual
 :-------------------------: | :-------------------------: |
 <img width="500" height="450" alt="image" src="https://github.com/user-attachments/assets/e399989b-fe38-4427-b14e-a9ad72f52b43" /> | <img width="500" height="450" alt="image" src="https://github.com/user-attachments/assets/45b86306-57a5-43ea-a3cc-9c24f10ce463" />
