@@ -186,6 +186,7 @@ Home Assistant            | Apple Homekit
 
 ## Sample YAML for Home Assistant
 ```
+//If you already have other sensor in config, no need to add in the "template:" just continue 
 template:
     - sensor:
       - name: "gate"
