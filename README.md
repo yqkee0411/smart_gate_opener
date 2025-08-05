@@ -6,7 +6,7 @@ A retrofit IoT solution to automate an existing gate system using an **ESP8266 r
 ## Acheivement
 
 - Added **smart control** to existing gate system without replacing the control board.
-- Integrated with **Home Assistant and Apple HomeKit** for remote access and automations.
+- Integrated with **Home Assistant and Apple HomeKit** for remote access, real-time status monitoring (open/closed) and automations.
 - Preserves original **RF remote functionality** while enabling Wi-Fi control.
 - Uses **GPIO sensing** to detect gate open/close state via external light relay.
 - Solved poor RF range issue and improved convenience for parcel deliveries.
@@ -151,7 +151,15 @@ To repurpose this feature for state detection:
 - **Home Assistant:** Lovelace card to open/close gate and view status.
 - **Apple HomeKit:** Gate appears as an accessory in the Home app.
 
-*(Insert screenshots of dashboard and HomeKit integration here)*
+
+Home Assistant            | Apple Homekit
+:-------------------------:| :-------------------------:
+<img width="414" height="91" alt="Screenshot 2025-08-05 at 2 43 11 PM" src="https://github.com/user-attachments/assets/209af6be-23f5-4b01-8948-4bce8bd2d39b" />  | <img width="165" height="78" alt="Screenshot 2025-08-05 at 2 44 17 PM" src="https://github.com/user-attachments/assets/f8070991-a76e-49cd-8b4e-baba8986624e" />
+<img width="591" height="572" alt="Screenshot 2025-08-05 at 2 43 25 PM" src="https://github.com/user-attachments/assets/af5d654c-a18c-4dcf-ad95-fa18d494c534" /> | <img width="296" height="599" alt="Screenshot 2025-08-05 at 2 44 09 PM" src="https://github.com/user-attachments/assets/4c6053f0-8363-45f4-a71e-fe4f88ebe116" />
+
+
+
+<!-- *(Insert screenshots of dashboard and HomeKit integration here)* -->
 
 <!--
 ---
@@ -165,16 +173,7 @@ To repurpose this feature for state detection:
 - HomeKit integration via Home Assistant
 
 ---
--->
 
-## Project Impact
-
-- Ability to remotely control the gate for deliveries and visitors.
-- Eliminated frustrations with poor RF remote range.
-- Added real-time status monitoring (open/closed).
-- Achieved full smart home integration without replacing existing hardware.
-
----
 
 ## Repository Contents
 
@@ -182,8 +181,54 @@ To repurpose this feature for state detection:
 - Tasmota configuration details
 - Home Assistant YAML snippets
 - Dashboard screenshots
-
+-->
 ---
+
+## Sample YAML for Home Assistant
+```
+template:
+    - sensor:
+      - name: "gate"
+        state: >
+          {% if is_state('binary_sensor.gate_sensor', 'off') and is_state('switch.tasmota', 'on') %}
+            opening
+          {% elif is_state('binary_sensor.gate_sensor', 'on') and is_state('switch.tasmota', 'on') %}
+            closing
+          {% elif is_state('binary_sensor.gate_sensor', 'on') %}
+            open
+          {% else %}
+            closed
+          {% endif %}
+
+cover:
+  - platform: template
+    covers:
+      gate:
+        device_class: gate
+        friendly_name: "Gate"
+        value_template: "{{ states('sensor.gate') }}"
+        open_cover:
+          - condition: state
+            entity_id: sensor.gate
+            state: "closed"
+          - service: switch.toggle
+            target:
+              entity_id: switch.gate
+        close_cover:
+          - condition: state
+            entity_id: sensor.gate
+            state: "open"
+          - service: switch.toggle
+            target:
+              entity_id: switch.gate
+        stop_cover:
+          service: switch.toggle
+          target:
+            entity_id: switch.gate
+
+```            
+            
+
 
 ## License
 
