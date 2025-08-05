@@ -50,6 +50,7 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 *(Add wiring diagram here)*
 -->
 > This board includes a built-in 220V AC to DC power supply, allowing direct connection to the gate controller’s mains input.
+
 ESP8266 Relay Board           |
 :-------------------------:|
 <img width="512" height="468" alt="ESP8266-4-Relay" src="https://github.com/user-attachments/assets/75a68d3e-11a3-40da-92f4-01e3e778809b" /> |
@@ -87,6 +88,8 @@ Existing Gate Controller Board      | Wiring Manual
 
 > **⚠️ Safety Warning**  
 > Working with mains electricity can be dangerous. Ensure the power is switched off before wiring. If unsure, turn off the **main breaker** (note: this cuts power to the entire house).
+
+> Note: The wiring and functions may differ depending on the make and model of your gate controller board. Always refer to your board’s manual before connecting.
 
 #### Steps
 
