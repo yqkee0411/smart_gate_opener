@@ -54,7 +54,7 @@ ESp8266 Relay Board           |
 :-------------------------:|
 <img width="512" height="468" alt="ESP8266-4-Relay" src="https://github.com/user-attachments/assets/75a68d3e-11a3-40da-92f4-01e3e778809b" /> |
 
-Gate Controller Board      | Wiring Diagram
+Gate Controller Board      | Wiring Manual
 :-------------------------: | :-------------------------: |
 <img width="500" height="450" alt="image" src="https://github.com/user-attachments/assets/e399989b-fe38-4427-b14e-a9ad72f52b43" /> | <img width="500" height="450" alt="image" src="https://github.com/user-attachments/assets/45b86306-57a5-43ea-a3cc-9c24f10ce463" />
 
