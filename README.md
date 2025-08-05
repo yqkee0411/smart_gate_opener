@@ -15,13 +15,13 @@ A retrofit IoT solution to automate an existing gate system using an **ESP8266 r
 
 ## Overview
 
-This project adds smart control to my home's gate system. Instead of replacing the gate controller which is expensive and wasteful, I used an ESP8266 with a relay to **simulate a physical button press**, preserving full compatibility with the original remote control. Additionally, I integrated a **state detection mechanism** by reading a GPIO signal from the gate's lighting relay, which indicates whether the gate is open or closed (Depending on the control board model, you mileage may vary).
+This project adds smart control to my home's gate system. Instead of replacing the gate controller which is expensive and wasteful, I used an ESP8266 with a relay to **simulate a physical button press**, preserving full compatibility with the original remote control. Additionally, I integrated a **state detection mechanism** by reading a GPIO signal from the gate's lighting relay, which indicates whether the gate is open or closed (Depending on the control board model, your mileage may vary).
 
 ## Motivation
 - Frequent parcel deliveries when I am not home.
 - Poor remote control range (car window tint blocks RF signal).
-- No need to wait for gate openeing while arriving home.
-- Wanted a **low-cost** solution that doesn't affect original funtionality, ensuring other family members can continue using it in their preferred way.
+- No need to wait for gate opening while arriving home.
+- Wanted a **low-cost** solution that doesn't affect original functionality, ensuring other family members can continue using it in their preferred way.
 
 By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now open/close the gate from my phone and check its status remotely.
 
@@ -40,8 +40,7 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 ## System Architecture
 
 ### Hardware
-
-- **ESP8266 Relay Board with 220v power supply**
+- **ESP8266 Relay Board with 220V power supply**
   - Relay simulates physical gate button press.
   - GPIO input connected to external light relay output for state detection.
   - This avoids needing an external power adapter and keeps the installation compact.
@@ -50,7 +49,8 @@ By integrating the gate into **Home Assistant** and **Apple HomeKit**, I can now
 <!--
 *(Add wiring diagram here)*
 -->
-ESp8266 Relay Board           |
+> This board includes a built-in 220V AC to DC power supply, allowing direct connection to the gate controller’s mains input.
+ESP8266 Relay Board           |
 :-------------------------:|
 <img width="512" height="468" alt="ESP8266-4-Relay" src="https://github.com/user-attachments/assets/75a68d3e-11a3-40da-92f4-01e3e778809b" /> |
 
